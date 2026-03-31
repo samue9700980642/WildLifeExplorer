@@ -3,14 +3,18 @@
     "name": "Lion",
     "image": "https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg",
     "type": "Mammal",
-    "location": "Africa",
-    "info": "Lions are social cats living in prides. They are apex predators."
+    "location": "Savannahs of Africa",
+    "lifespan": "10–14 years in the wild",
+    "diet": "Carnivore (antelopes, zebras)",
+    "info": "Lions are social cats living in prides. Apex predators."
   },
   {
     "name": "Tiger",
     "image": "https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg",
     "type": "Mammal",
-    "location": "Asia",
+    "location": "Forests of Asia",
+    "lifespan": "8–10 years",
+    "diet": "Carnivore (deer, wild boar)",
     "info": "Tigers are apex predators with iconic orange and black stripes."
   },
   {
@@ -18,90 +22,71 @@
     "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg",
     "type": "Mammal",
     "location": "Africa & Asia",
-    "info": "Elephants are the largest land animals, known for their intelligence and memory."
+    "lifespan": "60–70 years",
+    "diet": "Herbivore (grass, leaves, fruits)",
+    "info": "Elephants are the largest land animals, intelligent and social."
   },
   {
-    "name": "Panda",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Grosser_Panda.JPG",
+    "name": "Giraffe",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg",
     "type": "Mammal",
-    "location": "China",
-    "info": "Giant pandas are known for their black-and-white coloring and bamboo diet."
+    "location": "Savannahs of Africa",
+    "lifespan": "25 years",
+    "diet": "Herbivore (leaves, shoots)",
+    "info": "Tallest land animal, uses long necks to reach leaves."
   },
   {
-    "name": "Peacock",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/2/26/Peacock_Plumage.jpg",
-    "type": "Bird",
-    "location": "India",
-    "info": "Peacocks are famous for their colorful tail feathers used in courtship displays."
-  },
-  {
-    "name": "Kangaroo",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Kangaroo_Australia_01.jpg",
+    "name": "Cheetah",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Cheetah_in_Masai_Mara.jpg",
     "type": "Mammal",
-    "location": "Australia",
-    "info": "Kangaroos are marsupials that carry their young in pouches and are great jumpers."
+    "location": "Africa",
+    "lifespan": "10–12 years",
+    "diet": "Carnivore (small antelopes)",
+    "info": "Fastest land animal, skilled predator."
   },
   {
     "name": "Penguin",
     "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Emperor_Penguin_Manchot_empereur.jpg",
     "type": "Bird",
     "location": "Antarctica",
-    "info": "Penguins are flightless birds adapted to life in the water and cold climates."
+    "lifespan": "15–20 years",
+    "diet": "Carnivore (fish, krill)",
+    "info": "Flightless bird adapted to cold climates, excellent swimmers."
   },
   {
-    "name": "Giraffe",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg",
+    "name": "Polar Bear",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Polar_Bear_AdF.jpg",
     "type": "Mammal",
-    "location": "Africa",
-    "info": "Giraffes are the tallest land animals, known for their long necks and legs."
-  },
-  {
-    "name": "Zebra",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Plains_Zebra_Equus_quagga.jpg",
-    "type": "Mammal",
-    "location": "Africa",
-    "info": "Zebras are known for their black-and-white stripes and live in herds."
+    "location": "Arctic regions",
+    "lifespan": "20–25 years",
+    "diet": "Carnivore (seals)",
+    "info": "Largest bear species, apex predator in Arctic."
   },
   {
     "name": "Dolphin",
     "image": "https://upload.wikimedia.org/wikipedia/commons/4/40/Common_dolphin_noaa.jpg",
     "type": "Mammal",
     "location": "Oceans worldwide",
-    "info": "Dolphins are intelligent marine mammals known for their playful behavior."
+    "lifespan": "20–60 years depending on species",
+    "diet": "Carnivore (fish, squid)",
+    "info": "Intelligent marine mammals, social and playful."
   },
   {
-    "name": "Fox",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Red_fox_running.jpg",
-    "type": "Mammal",
-    "location": "Europe, Asia, North America",
-    "info": "Foxes are small to medium-sized omnivorous mammals with bushy tails."
-  },
-  {
-    "name": "Wolf",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Canis_lupus_lupus.jpg",
-    "type": "Mammal",
-    "location": "North America, Europe, Asia",
-    "info": "Wolves are social predators living in packs with strong family bonds."
-  },
-  {
-    "name": "Bear",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/0/08/2010-kodiak-bear.jpg",
-    "type": "Mammal",
-    "location": "North America, Europe, Asia",
-    "info": "Bears are large mammals known for strength and adaptability."
+    "name": "Shark",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/56/White_shark.jpg",
+    "type": "Fish",
+    "location": "Oceans worldwide",
+    "lifespan": "20–30 years",
+    "diet": "Carnivore (fish, seals)",
+    "info": "Apex predator of the ocean, multiple species exist."
   },
   {
     "name": "Owl",
     "image": "https://upload.wikimedia.org/wikipedia/commons/7/71/Great_Horned_Owl_-_Bubo_virginianus.jpg",
     "type": "Bird",
     "location": "Worldwide",
-    "info": "Owls are nocturnal birds of prey with excellent night vision."
-  },
-  {
-    "name": "Crocodile",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/NileCrocodile.jpg",
-    "type": "Reptile",
-    "location": "Africa, Asia, Americas",
-    "info": "Crocodiles are large aquatic reptiles known for powerful jaws."
+    "lifespan": "5–25 years depending on species",
+    "diet": "Carnivore (small mammals, insects)",
+    "info": "Nocturnal predator with excellent night vision."
   }
 ]
