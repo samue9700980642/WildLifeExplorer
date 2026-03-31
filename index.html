@@ -5,146 +5,94 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WildLife Explorer</title>
 <style>
-  /* ===== Reset & Body ===== */
-  * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
-  body { display:flex; min-height:100vh; background:#f0f0f0; transition: background 0.3s; }
+/* Reset & basics */
+* {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
+body, html {height:100%; overflow:hidden; background: url('https://images.unsplash.com/photo-1592194996308-7b39f9a8b30b?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed; background-size: cover; display: flex;}
+body::before {content:""; position:absolute; top:0; left:0; width:100%; height:100%; backdrop-filter: blur(8px); z-index:0;}
 
-  /* ===== Sidebar ===== */
-  #sidebar {
-    width: 250px;
-    background:#2c3e50;
-    color:#ecf0f1;
-    padding:20px;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-  }
-  #sidebar h2 { margin-bottom:10px; text-align:center; }
-  #sidebar input, #sidebar button, #sidebar textarea {
-    width:100%; padding:8px; border:none; border-radius:5px;
-    margin-bottom:10px; outline:none;
-  }
-  #sidebar button { background:#3498db; color:#fff; cursor:pointer; transition:0.2s; }
-  #sidebar button:hover { background:#2980b9; }
+/* Sidebar */
+.sidebar {width:250px; background: rgba(0,0,0,0.7); color: #fff; padding: 20px; display: flex; flex-direction: column; gap: 20px; z-index:1; transform: translateX(-300px); animation: slideInSidebar 1s forwards;}
+@keyframes slideInSidebar {0% {transform: translateX(-300px);} 100% {transform: translateX(0);}}
+.sidebar h2 {text-align:center; font-size:1.5rem; margin-bottom:20px; color: #FFD700;}
+.search-container input {width:100%; padding:10px; border:none; border-radius:5px; outline:none; transition: all 0.3s ease;}
+.search-container input:focus {box-shadow: 0 0 10px #FFD700; transform: scale(1.05);}
+.info p {font-size:0.95rem; color:#ddd;}
 
-  /* ===== Main Content ===== */
-  #main { flex:1; padding:20px; overflow-y:auto; }
-  #topbar { display:flex; justify-content:flex-end; margin-bottom:20px; }
-  #topbar span { font-weight:bold; color:#2c3e50; }
+/* Main content */
+.main-content {flex:1; display:flex; flex-direction: column; align-items:center; justify-content:flex-start; padding:20px; gap:30px; z-index:1; position: relative; overflow-y:auto;}
+.welcome-box {background: rgba(0,0,0,0.6); padding: 30px; border-radius: 15px; backdrop-filter: blur(5px); animation: fadeScaleIn 2s ease-in-out; text-align:center; transition: transform 0.3s ease, box-shadow 0.3s ease;}
+.welcome-box:hover {transform: scale(1.05) rotate(-1deg); box-shadow: 0 0 30px #FFD700;}
+.welcome-box h1 {font-size:2.5rem; margin-bottom:15px; color: #FFD700;}
+.welcome-box p {font-size:1.1rem; line-height:1.5; color:#fff;}
 
-  /* ===== Cards Grid ===== */
-  #cards { display:grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
-  .card { background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); cursor:pointer; transition:0.3s; }
-  .card:hover { transform:translateY(-5px); box-shadow:0 8px 12px rgba(0,0,0,0.2); }
-  .card img { width:100%; height:150px; object-fit:cover; }
-  .card .name { padding:10px; font-weight:bold; text-align:center; }
+/* Animations */
+@keyframes fadeScaleIn {0% {opacity:0; transform: scale(0.8) translateY(20px);} 100% {opacity:1; transform: scale(1) translateY(0);}}
 
-  /* ===== Modal ===== */
-  #modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; }
-  #modalContent { background:#fff; padding:20px; border-radius:10px; width:90%; max-width:500px; position:relative; }
-  #modalContent img { width:100%; border-radius:10px; margin-bottom:15px; }
-  #modalContent h2 { margin-bottom:10px; }
-  #modalContent p { margin-bottom:8px; }
-  #closeModal { position:absolute; top:10px; right:15px; font-size:20px; cursor:pointer; }
+/* Animal Cards Grid */
+.animal-grid {display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; width:100%; max-width:1200px;}
+.animal-card {background: rgba(0,0,0,0.6); border-radius: 15px; overflow:hidden; color:#fff; cursor:pointer; transform: scale(0); animation: cardAppear 0.5s forwards; transition: transform 0.3s ease, box-shadow 0.3s ease;}
+.animal-card:hover {transform: scale(1.05); box-shadow: 0 0 20px #FFD700;}
+.animal-card img {width:100%; height:150px; object-fit:cover;}
+.animal-card .card-info {padding:10px;}
+.animal-card .card-info h3 {color:#FFD700; margin-bottom:5px;}
+.animal-card .card-info p {font-size:0.9rem; color:#ddd;}
 
-  /* ===== Dark Theme ===== */
-  body.dark { background:#1c1c1c; color:#ecf0f1; }
-  body.dark #sidebar { background:#34495e; }
-  body.dark .card { background:#2c3e50; color:#ecf0f1; }
-  body.dark #modalContent { background:#34495e; color:#ecf0f1; }
+/* Card appear animation */
+@keyframes cardAppear {0% {transform: scale(0); opacity:0;} 100% {transform: scale(1); opacity:1;}}
+::-webkit-scrollbar {display:none;}
 </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div id="sidebar">
+<!-- Sidebar -->
+<div class="sidebar">
     <h2>WildLife Explorer</h2>
-    <input type="text" id="searchInput" placeholder="Search Animal...">
-    <button id="themeBtn">Toggle Dark/Light</button>
-    <textarea id="feedback" rows="4" placeholder="Give feedback..."></textarea>
-    <button id="submitFeedback">Submit Feedback</button>
-  </div>
-
-  <!-- Main Content -->
-  <div id="main">
-    <div id="topbar"><span>CEO: Subu Gurung</span></div>
-    <div id="cards"></div>
-  </div>
-
-  <!-- Modal -->
-  <div id="modal">
-    <div id="modalContent">
-      <span id="closeModal">&times;</span>
-      <img id="modalImg" src="" alt="Animal Image">
-      <h2 id="modalName"></h2>
-      <p><b>Type:</b> <span id="modalType"></span></p>
-      <p><b>Location:</b> <span id="modalLocation"></span></p>
-      <p id="modalInfo"></p>
+    <div class="search-container">
+        <input type="text" placeholder="Search an animal..." id="searchInput">
     </div>
-  </div>
+    <div class="info">
+        <p>Explore animals, their habitats, and interesting facts!</p>
+    </div>
+</div>
+
+<!-- Main content -->
+<div class="main-content">
+    <div class="welcome-box">
+        <h1>Welcome to WildLife Explorer</h1>
+        <p>“Immerse yourself in the wild, witness the beauty of nature, and discover creatures great and small. Adventure awaits in every corner of the animal kingdom!”</p>
+    </div>
+
+    <!-- Animal cards grid -->
+    <div class="animal-grid" id="animalGrid"></div>
+</div>
 
 <script>
-  let animals = [];
+// Sample preloaded animals (can expand to 50+ later)
+const animals = [
+  {name:"Lion", image:"https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg", type:"Mammal", info:"Apex predator of African savannahs."},
+  {name:"Tiger", image:"https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg", type:"Mammal", info:"Solitary hunter with striking stripes."},
+  {name:"Elephant", image:"https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg", type:"Mammal", info:"Largest land animal, intelligent and social."},
+  {name:"Giraffe", image:"https://upload.wikimedia.org/wikipedia/commons/9/9f/Giraffe_standing.jpg", type:"Mammal", info:"Tallest land animal with long neck."},
+  {name:"Cheetah", image:"https://upload.wikimedia.org/wikipedia/commons/4/4e/Cheetah_in_Masai_Mara.jpg", type:"Mammal", info:"Fastest land animal."},
+  {name:"Penguin", image:"https://upload.wikimedia.org/wikipedia/commons/e/e7/Emperor_Penguin_Manchot_empereur.jpg", type:"Bird", info:"Flightless bird, excellent swimmer."},
+  {name:"Polar Bear", image:"https://upload.wikimedia.org/wikipedia/commons/e/e6/Polar_Bear_AdF.jpg", type:"Mammal", info:"Apex predator of Arctic regions."},
+  {name:"Dolphin", image:"https://upload.wikimedia.org/wikipedia/commons/4/40/Common_dolphin_noaa.jpg", type:"Mammal", info:"Intelligent marine mammal."}
+];
 
-  // Load animals.json
-  fetch('animals.json')
-    .then(res => res.json())
-    .then(data => {
-      animals = data;
-      displayCards(animals);
-    });
-
-  // Display animal cards
-  function displayCards(list) {
-    const cardsContainer = document.getElementById('cards');
-    cardsContainer.innerHTML = '';
-    list.forEach(animal => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `<img src="${animal.image}" alt="${animal.name}"><div class="name">${animal.name}</div>`;
-      card.addEventListener('click', () => openModal(animal));
-      cardsContainer.appendChild(card);
-    });
-  }
-
-  // Modal functions
-  const modal = document.getElementById('modal');
-  const modalImg = document.getElementById('modalImg');
-  const modalName = document.getElementById('modalName');
-  const modalType = document.getElementById('modalType');
-  const modalLocation = document.getElementById('modalLocation');
-  const modalInfo = document.getElementById('modalInfo');
-  const closeModalBtn = document.getElementById('closeModal');
-
-  function openModal(animal) {
-    modal.style.display = 'flex';
-    modalImg.src = animal.image;
-    modalName.textContent = animal.name;
-    modalType.textContent = animal.type;
-    modalLocation.textContent = animal.location;
-    modalInfo.textContent = animal.info;
-  }
-  closeModalBtn.onclick = () => { modal.style.display = 'none'; }
-  window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; }
-
-  // Search functionality
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    const filtered = animals.filter(a => a.name.toLowerCase().includes(query));
-    displayCards(filtered);
-  });
-
-  // Dark/Light theme toggle
-  const themeBtn = document.getElementById('themeBtn');
-  themeBtn.addEventListener('click', () => { document.body.classList.toggle('dark'); });
-
-  // Feedback button
-  document.getElementById('submitFeedback').addEventListener('click', () => {
-    const feedback = document.getElementById('feedback').value;
-    if(feedback) { alert('Feedback submitted! Thank you.'); document.getElementById('feedback').value=''; }
-    else { alert('Please enter feedback first.'); }
-  });
+// Render animal cards
+const grid = document.getElementById('animalGrid');
+animals.forEach((animal, index)=>{
+    const card = document.createElement('div');
+    card.className = 'animal-card';
+    card.style.animationDelay = `${index*0.1}s`; // stagger animation
+    card.innerHTML = `<img src="${animal.image}" alt="${animal.name}">
+                      <div class="card-info">
+                        <h3>${animal.name}</h3>
+                        <p>${animal.type}</p>
+                        <p>${animal.info}</p>
+                      </div>`;
+    grid.appendChild(card);
+});
 </script>
 
 </body>
